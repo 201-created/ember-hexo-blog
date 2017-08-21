@@ -4,6 +4,7 @@
 const HexoPlugin = require('./broccoli/hexo');
 const Funnel = require('broccoli-funnel');
 const fs = require('fs');
+const path = require('path');
 
 module.exports = {
   name: 'ember-hexo-blog',
@@ -17,12 +18,15 @@ module.exports = {
       return;
     }
 
-    if (!fs.existsSync('blog')) {
+    let blogSourcePath = path.join(this.app.project.root, 'blog');
+
+    if (!fs.existsSync(blogSourcePath)) {
       return;
     }
 
-    let blogDirFunnel = new Funnel('blog', {
+    let blogDirFunnel = new Funnel(blogSourcePath, {
       exclude: ['_multiconfig.yml', 'db.json']
     });
+    return new HexoPlugin([blogDirFunnel]);
   }
 };
