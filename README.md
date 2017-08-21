@@ -18,7 +18,7 @@ application.
 Install this addon via the usual steps:
 
 ```
-yarn add ember-hexo-blog
+yarn add ember-hexo-blog --dev
 ```
 
 Now create a new Hexo blog:
