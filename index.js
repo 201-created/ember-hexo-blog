@@ -5,12 +5,17 @@ const HexoPlugin = require('./broccoli/hexo');
 const Funnel = require('broccoli-funnel');
 const fs = require('fs');
 const path = require('path');
+const express = require('express');
 
 module.exports = {
   name: 'ember-hexo-blog',
 
   isDevelopingAddon() {
     return false;
+  },
+
+  serverMiddleware({app, options}) {
+    app.get(new RegExp(`blog.*/$`), express.static('dist/'));
   },
 
   treeFor(name) {
